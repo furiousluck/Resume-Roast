@@ -34,11 +34,11 @@ function App() {
 
   return (
     <div className="App">
-      <h1>AI Resume Roaster</h1>
+      <h1>AI Resume Roaster💼</h1>
+      <h3>Want to get roasted and get opinion, you are at right place 🥴</h3>
       <form onSubmit={handleSubmit}>
         <input type="file" onChange={handleFileChange} accept="application/pdf" required />
         <button type="submit">Upload</button>
-
       </form>
       {error && <p className="error">{error}</p>}
       <div className='markdown'>
