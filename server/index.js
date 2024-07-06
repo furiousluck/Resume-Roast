@@ -11,11 +11,7 @@ app.listen(3000, () => {
   console.log("server started");
 });
 
-app.use(cors(
-    {
-        origin: 'https://resume-roast.vercel.app/'
-    }
-)); // Enable CORS for all origins
+app.use(cors());
 app.use(express.static("uploads"));
 app.use(express.json());
 
