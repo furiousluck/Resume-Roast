@@ -13,12 +13,16 @@ async function getResumeText(path) {
     model: "gemini-1.5-pro",
   });
   const prompt = data.text + " roast my resume to extreme level";
-  console.log(prompt)
-  const result = await model.generateContent(prompt);
-  const response = result.response;
-  const text = response.text();
-  console.log(text);
-  return text;
+  console.log(prompt);
+  try {
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    const text = response.text();
+    console.log(text);
+    return text;
+  } catch (err) {
+    return "Looks like the resume contained something that I can't process. Please try again with a different resume.";
+  }
 }
 
 module.exports = getResumeText;
