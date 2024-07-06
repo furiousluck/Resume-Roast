@@ -5,8 +5,6 @@ const multer = require("multer");
 const getResumeText = require("./utils/gpt");
 const cors = require("cors");
 
-
-
 app.listen(3000, () => {
   console.log("server started");
 });
@@ -27,10 +25,23 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("file");
 
 app.post("/upload", upload, async (req, res) => {
-  const path = `./uploads/${req.file.originalname}`;
-  const text = await getResumeText(path);
-  res.send(text);
-  fs.unlinkSync(path);
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+
+    const path = `./uploads/${req.file.originalname}`;
+    const text = await getResumeText(path);
+
+    // Assuming getResumeText function returns a promise resolving to text
+    res.send(text);
+
+    // Clean up: delete the uploaded file after processing
+    fs.unlinkSync(path);
+  } catch (err) {
+    console.error("Error handling upload:", err);
+    res.status(500).json({ error: "Error uploading or processing file" });
+  }
 });
 
 app.get("/", (req, res) => {
