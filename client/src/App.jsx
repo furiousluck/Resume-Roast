@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
+import { Analytics } from '@vercel/analytics/react'; 
 import "./App.css";
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
       <div className="markdown">
         <ReactMarkdown>{text}</ReactMarkdown>
       </div>
+      <Analytics />
     </div>
   );
 }
