@@ -44,6 +44,6 @@ app.post("/upload", upload, async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
-  res.json("Hello World");
+app.get("/health", (req, res) => {
+  res.status(200).json({ message: "UP" });
 });
